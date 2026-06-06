@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用户管理系统</title>
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+  <body>
+    <!-- 登录提示遮罩 -->
+    <div class="login-overlay" id="loginOverlay">
+      <div class="login-prompt">
+        <h2>🔐 请先登录</h2>
+        <p>您需要登录后才能访问此页面</p>
+        <button class="btn btn-primary" id="goLoginBtn">立即登录</button>
+      </div>
+    </div>
+
+    <div class="container" id="mainContainer" style="display: none">
+      <header>
+        <h1>👥 用户管理系统</h1>
+        <div class="header-right">
+          <span class="user-info" id="userInfo">欢迎, </span>
+          <button class="btn btn-secondary" id="logoutBtn">退出登录</button>
+        </div>
+      </header>
+
+      <!-- 搜索栏 -->
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="搜索姓名或邮箱..." />
+        <button class="btn btn-secondary" id="searchBtn">搜索</button>
+      </div>
+
+      <!-- 用户列表表格 -->
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>邮箱</th>
+            <th>创建时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="userTableBody">
+          <!-- 用户数据将动态填充 -->
+        </tbody>
+      </table>
+
+      <!-- 分页控件 -->
+      <div class="pagination">
+        <button class="btn btn-outline" id="prevBtn" disabled>上一页</button>
+        <span id="pageInfo">第 1 页 / 共 1 页</span>
+        <span id="totalCount">共 0 条</span>
+        <select id="pageSizeSelect">
+          <option value="10">10条/页</option>
+          <option value="20">20条/页</option>
+          <option value="50">50条/页</option>
+          <option value="100">100条/页</option>
+          <option value="1000">1000条/页</option>
+        </select>
+        <button class="btn btn-outline" id="nextBtn" disabled>下一页</button>
+      </div>
+    </div>
+
+    <!-- 模态框 -->
+    <div class="modal" id="modal" style="display: none">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modalTitle">新增用户</h2>
+          <span class="close" id="modalClose">&times;</span>
+        </div>
+        <form id="userForm">
+          <div class="form-group">
+            <label for="name">姓名</label>
+            <input type="text" id="name" required placeholder="请输入姓名" />
+          </div>
+          <div class="form-group">
+            <label for="email">邮箱</label>
+            <input type="email" id="email" required placeholder="请输入邮箱" />
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="modalCancelBtn">
+              取消
+            </button>
+            <button type="submit" class="btn btn-primary">保存</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- 确认删除模态框 -->
+    <div class="modal" id="deleteModal" style="display: none">
+      <div class="modal-content delete-modal">
+        <div class="modal-header">
+          <h2>确认删除</h2>
+          <span class="close" id="deleteModalClose">&times;</span>
+        </div>
+        <p>确定要删除该用户吗？此操作不可撤销。</p>
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" id="deleteCancelBtn">
+            取消
+          </button>
+          <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+            删除
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast 提示 -->
+    <div class="toast" id="toast"></div>
+
+    <script src="./js/index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用户登录</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+  <body>
+    <!-- 登录表单 -->
+    <div class="login-container">
+      <div class="login-header">
+        <h1>🔐 用户登录</h1>
+        <p>欢迎回来，请登录您的账户</p>
+      </div>
+
+      <form class="login-form" id="loginForm">
+        <div class="form-group">
+          <label for="email">邮箱</label>
+          <input type="email" id="email" placeholder="admin@qq.com" required />
+          <div class="error-message" id="emailError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">密码</label>
+          <input type="password" id="password" placeholder="123456" required />
+          <div class="error-message" id="passwordError"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="submitBtn">
+          登录
+        </button>
+
+        <div class="error-message" id="formError"></div>
+      </form>
+
+      <div class="toggle-mode">
+        还没有账户？<button onclick="switchToRegister()">立即注册</button>
+      </div>
+
+      <div class="login-footer">
+        <a href="#" onclick="switchToForgotPassword()">忘记密码？</a>
+      </div>
+    </div>
+
+    <!-- 注册表单 -->
+    <div class="login-container" id="registerContainer" style="display: none">
+      <div class="login-header">
+        <h1>📝 用户注册</h1>
+        <p>创建您的账户</p>
+      </div>
+
+      <form class="login-form" id="registerForm">
+        <div class="form-group">
+          <label for="regName">姓名</label>
+          <input type="text" id="regName" placeholder="请输入姓名" required />
+          <div class="error-message" id="regNameError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="regEmail">邮箱</label>
+          <input type="email" id="regEmail" placeholder="请输入邮箱" required />
+          <div class="error-message" id="regEmailError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="regPassword">密码</label>
+          <input
+            type="password"
+            id="regPassword"
+            placeholder="请输入密码"
+            required
+          />
+          <div class="error-message" id="regPasswordError"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="regSubmitBtn">
+          注册
+        </button>
+
+        <div class="error-message" id="regFormError"></div>
+      </form>
+
+      <div class="toggle-mode">
+        已有账户？<button onclick="switchToLogin()">立即登录</button>
+      </div>
+    </div>
+
+    <!-- 忘记密码表单 -->
+    <div
+      class="login-container"
+      id="forgotPasswordContainer"
+      style="display: none"
+    >
+      <div class="login-header">
+        <h1>🔑 忘记密码</h1>
+        <p>请按步骤重置您的密码</p>
+      </div>
+
+      <!-- 步骤1：输入邮箱 -->
+      <div id="step1">
+        <form class="login-form" id="forgotForm">
+          <div class="form-group">
+            <label for="forgotEmail">邮箱</label>
+            <input
+              type="email"
+              id="forgotEmail"
+              placeholder="请输入注册时的邮箱"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">发送验证码</button>
+
+          <div class="error-message" id="forgotError"></div>
+        </form>
+
+        <div class="toggle-mode">
+          返回登录？<button onclick="switchToLogin()">立即登录</button>
+        </div>
+      </div>
+
+      <!-- 步骤2：输入验证码和新密码 -->
+      <div id="step2" style="display: none">
+        <form class="login-form" id="resetForm">
+          <div class="form-group">
+            <label for="verificationCode">验证码</label>
+            <input
+              type="text"
+              id="verificationCode"
+              placeholder="请输入验证码"
+              required
+              maxlength="6"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="newPassword">新密码</label>
+            <input
+              type="password"
+              id="newPassword"
+              placeholder="请输入新密码"
+              required
+            />
+          </div>
+
+          <div class="form-actions" style="display: flex; gap: 12px">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="backToStep1()"
+            >
+              返回
+            </button>
+            <button type="submit" class="btn btn-primary">确认重置</button>
+          </div>
+
+          <div class="error-message" id="resetError"></div>
+        </form>
+      </div>
+
+      <!-- 步骤3：成功提示 -->
+      <div id="step3" style="display: none; text-align: center">
+        <div style="font-size: 48px; margin-bottom: 16px">✅</div>
+        <h2>密码重置成功</h2>
+        <p style="color: #64748b; margin: 16px 0">您的密码已成功重置</p>
+        <button class="btn btn-primary" onclick="switchToLogin()">
+          返回登录
+        </button>
+      </div>
+    </div>
+
+    <!-- Toast 提示 -->
+    <div class="toast" id="toast"></div>
+
+    <script src="js/login.js"></script>
+  </body>
+</html>
